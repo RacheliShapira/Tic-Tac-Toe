@@ -40,9 +40,10 @@ isTie(){
   });
 }
 
-isWin(){
+isWin(winnerP){
+  console.log("winnerP", winnerP);
   this.setState({
-    gameWin: true
+    gameWin: winnerP
   });
 }
 

@@ -29,7 +29,7 @@ function GameFrame(props) {
                 )}
             {props.gameWin && (
                 <div className="sideP">
-                    <h2 className="gameOver">Winner!!</h2>
+                    <h2 className="gameOver">The Winner is {props.gameWin}!!</h2>
                 </div>
                 )}
             <button onClick={props.isReset}>New Game</button>

@@ -5,8 +5,8 @@ export default class GameBoard extends React.Component {
     constructor(props) {
         super(props);
         this.slots=[];
-        this.victory=false;
-        this.emptySlotscounter=0
+        this.victorPlayer=false;
+        this.occupiedSlotscounter=0
         this.winner="";
        this.winnerVcombination=[[0,1,2],[3,4,5],[6,7,8]]
        this.winnerHcombination=[[0,3,6],[1,4,7],[2,5,8]]
@@ -35,17 +35,17 @@ export default class GameBoard extends React.Component {
  
     play(x){
         
-        if (!this.props.gameTie & !this.victory & this.slots[x]==="emptySlot") {
+        if (!this.props.gameTie & !this.victorPlayer & this.slots[x]==="emptySlot") {
             this.slots[x]=this.props.currentPlayer;  
-            this.victory= this.checkWin(x); 
-            if ( this.victory)    {
-                this.props.isWin();
-                console.log("Winner is ", this.victory);
+            this.victorPlayer= this.checkWin(x); 
+            if ( this.victorPlayer)    {
+                this.props.isWin(this.victorPlayer);
+                console.log("Winner is ", this.victorPlayer);
             }  
             this.props.changePlayer();    
         } 
-        this.emptySlotscounter++;
-       if ( !this.victory &this.emptySlotscounter===9) {
+        this.occupiedSlotscounter++;
+       if ( !this.victorPlayer &this.occupiedSlotscounter===9) {
         this.props.isTie();
        }
     }
@@ -60,9 +60,11 @@ export default class GameBoard extends React.Component {
             this.winner =this.checkDwin(slotNum)
         } 
        
-        // console.log("this.winner", this.winner);
+        console.log("this.winner", this.winner[0], this.winner[1]);
+        
         if (this.winner) {
-            return true
+            // markWin(this.winner[0])
+            return this.winner[1]
         } else {
             return false
         }        
@@ -79,14 +81,10 @@ export default class GameBoard extends React.Component {
                 } else if (this.slots[this.winnerVcombination[vComboOut][vComboIn]]==="player2"){
                     player2Count++;  
                 }  
-                if (player1Count===3){
-                    // console.log("combo", this.winnerVcombination[vComboOut]);
-                    return "player1"
-                } else  if (player2Count===3){
-                 return "player2"
-                 }               
+                if (player1Count===3|player2Count===3){
+                    return  [this.winnerVcombination[vComboOut], this.props.currentPlayer]
+                }            
            }  
-                
         }     
         return false
     }
@@ -103,11 +101,9 @@ export default class GameBoard extends React.Component {
                 } else if (this.slots[this.winnerHcombination[hComboOut][hComboIn]]==="player2"){
                     player2Count++;  
                 } 
-                if (player1Count===3){
-                    return "player1"
-                } else  if (player2Count===3){
-                 return "player2"
-                 }             
+                if (player1Count===3|player2Count===3){
+                    return  [this.winnerHcombination[hComboOut], this.props.currentPlayer]
+                }          
            }    
                  
         }     
@@ -124,11 +120,9 @@ export default class GameBoard extends React.Component {
                 } else if (this.slots[this.winnerDcombination[dComboOut][dComboIn]]==="player2"){
                     player2Count++;  
                 }             
-                if (player1Count===3){
-                    return "player1"
-                } else  if (player2Count===3){
-                 return "player2"
-                 } 
+                if (player1Count===3|player2Count===3){
+                    return  [this.winnerDcombination[dComboOut], this.props.currentPlayer]
+                }
             }    
                  
         }     
