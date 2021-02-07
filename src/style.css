@@ -55,7 +55,17 @@ html {
   width: 120px; 
 }
 
-
+@keyframes example {
+  0%   {background-color: rgb(198, 198, 248);}
+  25%  {background-color: rgb(131, 131, 197);}
+  50%  {background-color: rgb(66, 66, 173);}
+  100% {background-color: rgb(131, 131, 197);}
+}
+.winCombo{
+  animation-name: example;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
 
 .player1{
   background-image: url(x.png);

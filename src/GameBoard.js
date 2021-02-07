@@ -63,7 +63,7 @@ export default class GameBoard extends React.Component {
         console.log("this.winner", this.winner[0], this.winner[1]);
         
         if (this.winner) {
-            // markWin(this.winner[0])
+            this.markWin(this.winner[0])
             return this.winner[1]
         } else {
             return false
@@ -124,10 +124,18 @@ export default class GameBoard extends React.Component {
                     return  [this.winnerDcombination[dComboOut], this.props.currentPlayer]
                 }
             }    
-                 
         }     
         return false
     }
+
+    markWin(winCombo){
+        winCombo.forEach(element => {
+            
+            this.slots[element]+=" winCombo"
+            console.log("com", this.slots[element]);
+        });    
+    }
+   
 
 
     render() {

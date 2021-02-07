@@ -10,7 +10,7 @@ function GameFrame(props) {
         var pPlayer1="pBig";
         var pPlayer2="pSmall";
     } else{
-        var pPlayer1="pSmall"   ;
+        var pPlayer1="pSmall";
         var pPlayer2="pBig"; 
     }
     
@@ -29,7 +29,8 @@ function GameFrame(props) {
                 )}
             {props.gameWin && (
                 <div className="sideP">
-                    <h2 className="gameOver">The Winner is {props.gameWin}!!</h2>
+                    <h2 className="gameOver">The Winner is:</h2>
+                    <h2 className="gameOver"> {props.gameWin}</h2>
                 </div>
                 )}
             <button onClick={props.isReset}>New Game</button>
